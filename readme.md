@@ -2,6 +2,10 @@
 
 An educational team project combining VGG16-based brain MRI classification and clinical-data machine learning in a multi-page Streamlit application. The project explores model selection, preprocessing, hyperparameter tuning and interactive presentation of predictions.
 
+## Live Demo
+
+[Open the NeuroInsight Live Demo](https://alzheimer-classification-l7s2.onrender.com/#home)
+
 ## Results
 
 The original coursework presentation reports the following results. These scores have not been independently reproduced from the current repository.
