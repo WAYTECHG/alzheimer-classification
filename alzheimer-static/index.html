@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An educational Alzheimer classification project with MRI and clinical models running locally in your browser.">
+  <title>Alzheimer Prediction</title>
+  <link rel="icon" href="assets/brain.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="vendor/lottie.min.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <button id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  <aside id="sidebar">
+    <h1>Alzheimer<br>Predictive System</h1>
+    <label for="page-picker">You are welcome to pick any of these website</label>
+    <select id="page-picker">
+      <option value="home">Home page</option>
+      <option value="chatbot">Chatbot</option>
+      <option value="clinical">Alzheimer Prediction Data Info</option>
+      <option value="mri">Alzheimer Prediction MRI</option>
+      <option value="about">About us</option>
+    </select>
+    <div class="disclaimer"><h2>Disclaimer!</h2><p>This educational project provides model predictions for informational purposes. It is not a medical diagnostic tool.</p><p>Thank you for paying attention!</p></div>
+    <div class="sidebar-foot">Static edition<br>Models run in your browser<br><a href="https://github.com/WAYTECHG/alzheimer-classification" target="_blank" rel="noopener noreferrer">View project on GitHub ↗</a></div>
+  </aside>
+  <main id="main" tabindex="-1">
+    <section id="home" class="page">
+      <div class="columns home-columns">
+        <div><h1>Alzheimer System Prediction</h1>
+          <div class="tabs" role="tablist" aria-label="Project introduction">
+            <button id="tab-definition" class="active" role="tab" aria-selected="true" aria-controls="definition">Definition</button>
+            <button id="tab-reason" role="tab" aria-selected="false" aria-controls="reason">Reason</button>
+            <button id="tab-aim" role="tab" aria-selected="false" aria-controls="aim">Aim</button>
+          </div>
+          <div id="definition" role="tabpanel" aria-labelledby="tab-definition"><h2>What is Alzheimer?</h2><p>Alzheimer’s disease is a progressive neurological disorder that affects the brain, causing problems with memory, thinking, and behavior. It is the most common cause of dementia, a general term for memory loss and other cognitive abilities serious enough to interfere with daily life.</p></div>
+          <div id="reason" role="tabpanel" aria-labelledby="tab-reason" hidden><h2>Why detection is needed?</h2><p>Early assessment can help people access care, plan for the future, and find support for themselves and their caregivers. A qualified clinician must assess symptoms and determine a diagnosis.</p></div>
+          <div id="aim" role="tabpanel" aria-labelledby="tab-aim" hidden><h2>The aim of this project</h2><p>This project explores Alzheimer-related classification using MRI images and structured clinical information. It presents two saved model workflows in an interactive application for coursework demonstrations.</p></div>
+          <p class="learn-more">Click learn more to know more about Alzheimer.</p>
+          <a href="https://www.mayoclinic.org/diseases-conditions/alzheimers-disease/symptoms-causes/syc-20350447" target="_blank" rel="noopener noreferrer">Learn More &gt;</a>
+          <p>Credit goes to <span class="accent">MayoClinic.</span></p>
+        </div>
+        <div class="animation" id="home-animation" aria-label="Brain illustration" role="img"><img src="assets/brain.svg" alt=""></div>
+      </div>
+    </section>
+    <section id="chatbot" class="page" hidden>
+      <h1>Alzheimer FAQ Chat</h1>
+      <div class="notice">Offline FAQ mode · Answers come from a fixed educational FAQ, not Gemini. A live Gemini chatbot needs a backend to protect its API key.</div>
+      <div class="chat-toolbar"><button id="new-chat">New Chat</button><span>Conversation stays in this tab.</span></div>
+      <div id="messages" aria-live="polite"></div>
+      <h2 class="accent">Prompt Suggestions about Alzheimer’s</h2><div id="suggestions" class="columns suggestions"></div>
+      <form id="chat-form"><label for="prompt">Your message here...</label><div class="chat-input"><input id="prompt" maxlength="4000" placeholder="Ask about the project or choose a suggestion" required><button type="submit">Send</button></div></form>
+    </section>
+    <section id="clinical" class="page" hidden>
+      <h1>Alzheimer Prediction Based On Data Info</h1>
+      <form id="clinical-form">
+        <div class="columns">
+          <div><h2>Physical Information</h2>
+            <label for="age">Age</label><input id="age" name="age" type="number" min="0" max="122" step="1" value="65" required>
+            <label for="gender">Gender</label><select id="gender" name="gender"><option>Male</option><option>Female</option></select>
+            <label for="education">Years of Education</label><input id="education" name="education" type="number" min="0" max="60" step="1" value="12" required>
+            <h2 class="spaced">Demographics</h2>
+            <fieldset><legend>Ethnicity</legend><label><input type="radio" name="ethnicity" value="Hisp/Latino" checked> Hisp/Latino</label><label><input type="radio" name="ethnicity" value="Not Hisp/Latino"> Not Hisp/Latino</label><label><input type="radio" name="ethnicity" value="Unknown"> Unknown</label></fieldset>
+            <fieldset><legend>Race Category</legend><label><input type="radio" name="race" value="White" checked> White</label><label><input type="radio" name="race" value="Black"> Black</label><label><input type="radio" name="race" value="Asian"> Asian</label></fieldset>
+          </div>
+          <div><h2>Genetic Information</h2>
+            <label for="apoe4">APOE Allele Type</label><select id="apoe4" name="apoe4"><option value="0">APOE4_0</option><option value="1">APOE4_1</option><option value="2">APOE4_2</option></select>
+            <ul><li>APOE4_0: No copies of the APOE4 allele</li><li>APOE4_1: One copy of the APOE4 allele</li><li>APOE4_2: Two copies of the APOE4 allele</li></ul>
+            <label for="genotype">APOE4 Genotype</label><select id="genotype" name="genotype"><option>(2,2)</option><option>(2,3)</option><option>(2,4)</option><option>(3,3)</option><option>(3,4)</option><option>(4,4)</option></select>
+            <ul><li>(2,2): Two copies of APOE2</li><li>(2,3): One copy each of APOE2 and APOE3</li><li>(2,4): One copy each of APOE2 and APOE4</li><li>(3,3): Two copies of APOE3</li><li>(3,4): One copy each of APOE3 and APOE4</li><li>(4,4): Two copies of APOE4</li></ul>
+            <label for="imputed">Imputed Genotype</label><select id="imputed" name="imputed"><option>True</option><option>False</option></select>
+            <p class="muted">This indicates whether the genotype has been imputed. Imputation estimates unobserved genotypes from observed data.</p>
+          </div>
+        </div>
+        <hr><div class="columns"><div><h2>Cognitive Assessment</h2><label for="mmse">MMSE Score <output id="mmse-value">20</output></label><input id="mmse" name="mmse" type="range" min="20" max="30" step="1" value="20"></div><p>The Mini-Mental State Examination (MMSE) is a 30-point questionnaire used in clinical and research settings to measure cognitive impairment. This input is for demonstrating the model.</p></div>
+        <button id="clinical-predict" type="submit" class="primary">Predict</button>
+        <div id="clinical-result" class="result" aria-live="polite" hidden></div>
+      </form>
+      <hr><details id="dataset-details"><summary>Explore your clinical dataset</summary>
+        <p>Choose your own authorized CSV to view the original dataset charts locally. Your CSV is not uploaded. The MRI dataset does not supply these clinical fields.</p>
+        <label for="csv-file">Clinical dataset.csv</label><input id="csv-file" type="file" accept=".csv,text/csv">
+        <p id="csv-status" class="muted" role="status">No dataset selected. Prediction works without the CSV.</p>
+        <div id="dataset-charts" hidden>
+          <details open><summary>Percentage of Alzheimer categories among categorical features</summary><label for="category-feature">Select a feature to examine</label><select id="category-feature"><option>Gender</option><option>Ethnicity</option><option>APOE4_Status</option><option>Imputed_Genotype</option><option>APOE_Genotype</option></select><div id="category-chart" class="chart"></div></details>
+          <details><summary>Alzheimer in numerical features plotted together</summary><div class="columns"><label>X-axis<select id="scatter-x"><option>Age</option><option>Education_Year</option><option>MMSE</option></select></label><label>Y-axis<select id="scatter-y"><option>MMSE</option><option>Education_Year</option><option>Age</option></select></label></div><div id="scatter-chart" class="chart"></div></details>
+          <details><summary>Data Distribution and Correlation Matrix</summary><label for="hist-feature">Select a Numerical Feature</label><select id="hist-feature"><option>Age</option><option>Education_Year</option><option>MMSE</option></select><div id="hist-chart" class="chart"></div><div id="corr-chart" class="chart"></div></details>
+          <details><summary>Alzheimer in a numerical feature with a categorical feature</summary><div class="columns"><label>Numerical feature<select id="strip-number"><option>Age</option><option>Education_Year</option><option>MMSE</option></select></label><label>Categorical feature<select id="strip-category"><option>Gender</option><option>Ethnicity</option><option>APOE4_Status</option><option>Imputed_Genotype</option><option>APOE_Genotype</option></select></label></div><div id="strip-chart" class="chart"></div></details>
+        </div>
+      </details>
+    </section>
+    <section id="mri" class="page" hidden>
+      <h1>Alzheimer’s Disease Prediction from MRI</h1><h2>Upload an MRI Image</h2>
+      <p class="muted">Educational model demonstration. This checkpoint has not reproduced the presentation scores.</p>
+      <label for="mri-file">Choose an MRI image...</label>
+      <div id="drop-zone" class="drop-zone"><span class="upload-icon" aria-hidden="true">⇧</span><p>Drag and drop an MRI image here<br><small>JPG, JPEG or PNG · Up to 10 MB</small></p><input id="mri-file" type="file" accept="image/jpeg,image/png"></div>
+      <p class="muted">Images stay in your browser. The first prediction downloads the approximately 16 MB CNN model.</p>
+      <div id="mri-preview" hidden><img id="mri-image" alt="Uploaded MRI image"><p class="muted">Uploaded MRI Image</p><button id="mri-predict" class="primary">Predict MRI</button></div>
+      <p id="mri-status" role="status" aria-live="polite"></p><div id="mri-result" class="result" aria-live="polite" hidden></div>
+    </section>
+    <section id="about" class="page" hidden>
+      <h1 class="center">Group Members</h1><div class="team-layout">
+        <div><article class="member"><h2>Oh Kai Wen</h2><p>Roles: Feature Engineering and Data Balancing, Model Training and Evaluation, Hyperparameter Tuning, Report Writing</p></article><article class="member"><h2>Alsthania</h2><p>Roles: Data Collection and Cleaning, Exploratory Data Analysis, Hyperparameter Tuning, MRI Image Analysis, Report Writing</p></article></div>
+        <div id="about-animation" class="animation" aria-label="Brain illustration" role="img"><img src="assets/brain.svg" alt=""></div>
+        <div><article class="member"><h2>Wilbert Andrew Yonathan</h2><p>Roles: Model Training and Evaluation, Hyperparameter Tuning, Streamlit Application Development, Report Writing</p></article><article class="member"><h2>Lu Zhuo Qing</h2><p>Roles: Exploratory Data Analysis, Hyperparameter Tuning, MRI Image Analysis, Report Writing</p></article></div>
+      </div>
+    </section>
+    <noscript><p>Enable JavaScript to use browser predictions and page navigation.</p></noscript>
+  </main>
+</body>
+</html>

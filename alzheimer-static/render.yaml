@@ -1,0 +1,12 @@
+# Optional: copy to the GitHub repository root for Blueprint deployment.
+# This configuration assumes the site lives in alzheimer-static/.
+services:
+  - type: web
+    name: alzheimer-classification-static
+    runtime: static
+    rootDir: alzheimer-static
+    buildCommand: "true"
+    staticPublishPath: .
+    envVars:
+      - key: SKIP_INSTALL_DEPS
+        value: "true"

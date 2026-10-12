@@ -1,0 +1,41 @@
+{
+  "browser": "Chromium",
+  "clinicalMaxDifference": 2.1141942363467336e-18,
+  "mri": {
+    "actual": [
+      0.16799162328243256,
+      0.005784718785434961,
+      0.540797233581543,
+      0.28542637825012207
+    ],
+    "expected": [
+      0.16799196600914001,
+      0.005784722976386547,
+      0.5407968163490295,
+      0.28542646765708923
+    ],
+    "maxDifference": 4.172325134277344e-7
+  },
+  "pagesChecked": 5,
+  "viewportWidths": [
+    1440,
+    1024,
+    768,
+    390,
+    320
+  ],
+  "horizontalOverflow": [],
+  "pageErrors": [],
+  "externalRequests": [],
+  "checks": [
+    "Tabs",
+    "Clinical prediction",
+    "CSV charts",
+    "Offline FAQ",
+    "Escaped chat input",
+    "MRI upload and inference",
+    "Invalid MRI file",
+    "Mobile navigation"
+  ],
+  "publicHosting": "Not deployed or tested on public hosts"
+}
