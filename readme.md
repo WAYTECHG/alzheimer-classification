@@ -1,112 +1,69 @@
-# 🧠 Alzheimer Prediction System
+# NeuroInsight: Alzheimer’s MRI and Clinical Classification
 
-A web-based **Alzheimer’s Disease Prediction System** built using **Streamlit** and **Machine Learning models**.
-This system predicts Alzheimer’s disease stages based on **clinical data** or **MRI data**, and also includes an integrated **chatbot** and **data analysis visualizations**.
+An educational team project combining VGG16-based brain MRI classification and clinical-data machine learning in a multi-page Streamlit application. The project explores model selection, preprocessing, hyperparameter tuning and interactive presentation of predictions.
 
----
+## Results
 
-## 🚀 Features
+The original coursework presentation reports the following results. These scores have not been independently reproduced from the current repository.
 
-### 🏠 Web Application (Streamlit)
+| Workflow | Model | Accuracy | Precision | Recall | F1 score |
+|---|---|---:|---:|---:|---:|
+| Brain MRI | VGG16 CNN | 91% | 92% | 92% | 92% |
+| Clinical data | Logistic Regression | 72% | 72% | 71% | 71% |
 
-The application includes several interactive pages:
+GridSearchCV tuning reduced clinical Logistic Regression accuracy from 72% to 69%; it did not improve this baseline. The project therefore demonstrates comparing experimental outcomes rather than assuming tuning always improves performance.
 
-- **Home Page** — Introduction and overview of the system.
-- **Chatbot** — Simple conversational assistant for user inquiries.
-- **Alzheimer Prediction Data Info** — Predict Alzheimer’s diagnosis using structured data.
-- **Alzheimer Prediction MRI** — Predict Alzheimer’s diagnosis from MRI data (image-based).
-- **About Us** — Team and project information.
+## My contribution
 
-### 🧩 Machine Learning Models
+The presentation credits **Wilbert Andrew Yonathan** with MRI prediction and interface development. My work focused on the MRI classification workflow and the Streamlit application interface. Clinical model comparisons and the complete application were collaborative team work.
 
-The system compares and evaluates several models for Alzheimer’s prediction:
+## Methods
 
-- **Linear Discriminant Analysis (LDA)**
-- **Logistic Regression (Base & Tuned)**
-- **Random Forest (Base & Tuned)**
-- **Ridge Classifier (Base & Tuned)**
-- **Gradient Boosting (Base & Tuned)**
-- **MLP Neural Network (Base & Tuned)**
-- **XGBoost (Base & Tuned)**
-- **SVM (Linear & Polynomial, Base & Tuned)**
-- **Stochastic Gradient Descent (Base & Tuned)**
+### MRI classification
 
-All models are evaluated using metrics like:
+- Kaggle MRI dataset with more than 6,400 images, as described in the presentation.
+- Four application labels: Mild Dementia, Moderate Dementia, Non Dementia and Very Mild Dementia.
+- VGG16 CNN trained with Adam, with resizing, normalization and augmentation explored during preprocessing.
+- Bayesian hyperparameter optimization using GPyOpt to explore learning rate, trainable layers, epochs and split settings.
+- Evaluation using accuracy, precision, recall, F1 score and confusion matrices.
 
-- Accuracy
-- Precision
-- Recall
-- F1 Score
-- Confusion Matrix Visualization
+### Clinical-data classification
 
----
+- ADNI structured features including demographic, cognitive and genetic information.
+- Three labels: Alzheimer’s disease, late mild cognitive impairment and cognitively normal.
+- Missing-value handling, one-hot encoding, exploratory analysis and SMOTE experiments.
+- Nine classifier families: LDA, Logistic Regression, Random Forest, Ridge, Gradient Boosting, MLP, XGBoost, SVM and SGD. Linear and polynomial SVM variants were compared.
+- Baseline and GridSearchCV-tuned model comparisons.
 
-## 📂 Project Structure
+## Application
 
-├── app.py                             # Main Streamlit app
+The Streamlit interface includes a home page, chatbot, clinical-data prediction, MRI upload and prediction, and team information. It brings both research workflows into one navigable prototype.
 
-├── config.py                          # Configuration settings
+## Run locally
 
-├── function.py                        # Helper functions (e.g., model evaluation)
+Clone the renamed repository and enter its directory:
 
-├── models/
+```bash
+git clone https://github.com/WAYTECHG/alzheimer-classification.git
+cd alzheimer-classification
+```
 
-│   └── alzheimer_info_model.pkl       # Saved ML model (Logistic Regression)
+Use an environment containing the dependencies imported by the application and the required model artifacts. Start the repository’s actual entry point:
 
-├── data/
+```bash
+streamlit run main.py
+```
 
-│   └── alzheimer_dataset.csv          # Dataset used for model training
+The application expects saved clinical and MRI models under `models/`. Check `config.py` and the prediction pages for their configured paths. A complete, pinned dependency file and reproducible MRI training pipeline are not currently documented, so this is not a verified clean-install procedure.
 
-├── web_pages/
+## Evaluation and implementation limitations
 
-│   ├── _home_page.py
+The clinical notebook applies SMOTE before the train/test split. Re-evaluation should split data first and restrict resampling to training folds to avoid contamination of the held-out evaluation.
 
-│   ├── _chatbot_page.py
+The current MRI preprocessing function returns an uninitialized array rather than the converted uploaded image. Its dimensions also differ from the presentation’s training resize. The inference path needs correction against the saved model’s input specification and validation before uploaded-image predictions can support the reported training results.
 
-│   ├── _predict_page.py
+The presentation’s scores describe the original coursework experiments; they do not establish clinical validity. This project is for education and research demonstration, not medical diagnosis.
 
-│   ├── _mri_predict_page.py
+## License
 
-│   └── _about_us.py
-
-└── README.md                          # Project documentation
-
-## ▶️ Running the Application
-
-streamlit run app.py
-
-## 📊 Dataset Information
-
-The dataset (`alzheimer_dataset.csv`) includes clinical features such as:
-
-* **Age**
-* **Gender**
-* **MMSE (Mini-Mental State Examination)**
-* **Education_Year**
-* **Ethnicity**
-* **APOE4_Status**
-* **APOE_Genotype**
-* and others...
-
-The target variable is  **DX.bl** , representing the Alzheimer’s diagnosis stage.
-
-## 🧪 Model Training Overview
-
-1. **Data Cleaning** — Missing values are removed.
-2. **Feature Encoding** — Categorical features converted using one-hot encoding.
-3. **Balancing** — Handled using **SMOTE** to mitigate class imbalance.
-4. **Splitting** — 80% training / 20% testing.
-5. **Model Training & Tuning** — Using **GridSearchCV** for hyperparameter optimization.
-6. **Evaluation** — Metrics and visualizations using Seaborn and Matplotlib.
-7. **Saving Model** — Best performing model saved as:
-   ./models/alzheimer_info_model.pkl
-
-
-## 🧠 Prediction Disclaimer
-
-> ⚠️ **Disclaimer:**
->
-> The predictions from this system are  **not intended for medical use** .
->
-> This tool is designed for  **informational and educational purposes only** .
->
+The repository includes an [MIT License](LICENSE). Dataset and third-party model terms remain applicable to their respective assets.
